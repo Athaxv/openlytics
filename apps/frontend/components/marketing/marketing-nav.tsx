@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
+import { BrandLogoLink } from "@/components/common/brand-logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -43,15 +44,10 @@ export function MarketingNav() {
             : "w-full max-w-6xl min-h-[4.25rem] rounded-2xl border-transparent bg-transparent px-4 py-3.5 shadow-none backdrop-blur-none sm:px-6",
         )}
       >
-        <Link
-          href="/"
-          className={cn(
-            "shrink-0 font-semibold tracking-tight text-foreground transition-[font-size] duration-300 ease-out motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
-            scrolled ? "text-sm sm:text-base" : "text-base sm:text-lg",
-          )}
-        >
-          Openlytics
-        </Link>
+        <BrandLogoLink
+          size={scrolled ? "sm" : "md"}
+          className="transition-opacity duration-300 ease-out motion-reduce:transition-none"
+        />
 
         <nav className={cn("hidden items-center md:flex", scrolled ? "gap-4" : "gap-5")} aria-label="Main">
           {navLinks.map((link) => (

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { BrandLogo } from "@/components/common/brand-logo";
 import { navLinks } from "@/lib/marketing/content";
 
 const FOOTER_COLUMNS = [
@@ -26,17 +28,23 @@ export function MarketingFooter() {
         aria-hidden
       />
 
-      <p
-        className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center text-[clamp(4rem,15vw,12rem)] font-semibold leading-none text-foreground/[0.04]"
+      <div
+        className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center select-none"
         aria-hidden
       >
-        Openlytics
-      </p>
+        <Image
+          src="/logo.png"
+          alt=""
+          width={480}
+          height={120}
+          className="h-auto w-[min(70vw,28rem)] opacity-[0.04] object-contain"
+        />
+      </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
           <div className="sm:col-span-2 md:col-span-2">
-            <p className="text-lg font-semibold tracking-tight">Openlytics</p>
+            <BrandLogo size="lg" />
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">
               Built for serious DSA practice — track, analyze, and improve.
             </p>
