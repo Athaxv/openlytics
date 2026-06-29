@@ -4,7 +4,7 @@ import { Providers } from "@/components/providers";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   title: "Openlytics",
   description:
     "Understand your coding journey and improve with AI-guided DSA analytics.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -38,7 +42,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", instrumentSerif.variable, geistMono.variable, shareTechMono.variable, "font-sans", geist.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        instrumentSerif.variable,
+        geistMono.variable,
+        shareTechMono.variable,
+        "font-sans",
+        geist.variable,
+      )}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background text-foreground">

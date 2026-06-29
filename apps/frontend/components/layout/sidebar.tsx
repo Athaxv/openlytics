@@ -1,13 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { BrandLogo, BrandLogoLink } from "@/components/common/brand-logo";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTitle,
 } from "@/components/ui/sheet";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
 import { SidebarProfile } from "@/components/layout/sidebar-profile";
@@ -59,14 +59,12 @@ export function Sidebar({ user }: SidebarProps) {
         <div className={cn("shrink-0 p-4", !expanded && "px-2")}>
           {expanded ? (
             <>
-              <h1 className="text-xl font-semibold tracking-tight">Openlytics</h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                DSA Analytics + AI Coach
-              </p>
+              <BrandLogoLink size="lg" />
+              <p className="mt-2 text-sm text-muted-foreground">DSA Analytics + AI Coach</p>
             </>
           ) : (
             <div className="flex justify-center">
-              <span className="text-lg font-semibold">O</span>
+              <BrandLogoLink size="xs" className="justify-center" />
             </div>
           )}
         </div>
@@ -86,7 +84,7 @@ export function Sidebar({ user }: SidebarProps) {
       <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
         <SheetContent side="left" className="flex w-64 flex-col p-0">
           <SheetHeader className="border-b border-border p-4 text-left">
-            <SheetTitle>Openlytics</SheetTitle>
+            <BrandLogo size="lg" />
             <p className="text-sm text-muted-foreground">DSA Analytics + AI Coach</p>
           </SheetHeader>
           <div className="flex-1 overflow-y-auto p-4">
