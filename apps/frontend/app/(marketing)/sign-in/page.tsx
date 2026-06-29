@@ -6,6 +6,7 @@ export default function SignInPage() {
     <MarketingAuthLayout
       title="Sign in"
       description="Welcome back. Continue your DSA journey."
+      eyebrow="Sign in"
     >
       <SignInForm />
     </MarketingAuthLayout>

@@ -6,6 +6,7 @@ export default function SignUpPage() {
     <MarketingAuthLayout
       title="Create account"
       description="Start tracking your coding practice with Openlytics."
+      eyebrow="Get started"
     >
       <SignUpForm />
     </MarketingAuthLayout>
