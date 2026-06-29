@@ -4,9 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  AuthFormCard,
+  authInputClassName,
+  authPrimaryButtonClassName,
   AuthFormDivider,
   AuthFormError,
+  AuthFormField,
+  AuthFormFooter,
+  AuthFormShell,
+  AuthGoogleButton,
 } from "@/components/marketing/auth-form-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,61 +48,59 @@ export function SignInForm() {
   }
 
   return (
-    <div className="space-y-6">
-      <AuthFormCard>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error ? <AuthFormError message={error} /> : null}
+    <div className="space-y-3 sm:space-y-4">
+      <AuthFormShell>
+        <div className="space-y-3.5 p-4 sm:space-y-4 sm:p-5">
+          <AuthGoogleButton href={googleAuthHref} />
 
-          <div className="space-y-2">
-            <label htmlFor="sign-in-email" className="text-sm font-medium text-foreground">
-              Email
-            </label>
-            <Input
-              id="sign-in-email"
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
-              className="h-10"
-            />
-          </div>
+          <AuthFormDivider />
 
-          <div className="space-y-2">
-            <label htmlFor="sign-in-password" className="text-sm font-medium text-foreground">
-              Password
-            </label>
-            <Input
-              id="sign-in-password"
-              type="password"
-              required
-              autoComplete="current-password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Your password"
-              className="h-10"
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            {error ? <AuthFormError message={error} /> : null}
 
-          <Button type="submit" disabled={loading} className="h-10 w-full">
-            {loading ? "Signing in..." : "Sign in"}
-          </Button>
-        </form>
-      </AuthFormCard>
+            <AuthFormField id="sign-in-email" label="Email">
+              <Input
+                id="sign-in-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@example.com"
+                className={authInputClassName}
+              />
+            </AuthFormField>
 
-      <AuthFormDivider />
+            <AuthFormField id="sign-in-password" label="Password">
+              <Input
+                id="sign-in-password"
+                type="password"
+                required
+                autoComplete="current-password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Your password"
+                className={authInputClassName}
+              />
+            </AuthFormField>
 
-      <Button variant="outline" className="h-10 w-full" render={<Link href={googleAuthHref} />}>
-        Continue with Google
-      </Button>
+            <Button
+              type="submit"
+              disabled={loading}
+              className={authPrimaryButtonClassName}
+            >
+              {loading ? "Signing in..." : "Sign in"}
+            </Button>
+          </form>
+        </div>
+      </AuthFormShell>
 
-      <p className="text-center text-sm text-muted-foreground">
+      <AuthFormFooter>
         Don&apos;t have an account?{" "}
-        <Link href="/sign-up" className="text-primary hover:underline">
+        <Link href="/sign-up" className="font-medium text-primary hover:underline">
           Sign up
         </Link>
-      </p>
+      </AuthFormFooter>
     </div>
   );
 }

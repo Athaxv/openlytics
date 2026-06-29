@@ -4,9 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  AuthFormCard,
+  authInputClassName,
+  authPrimaryButtonClassName,
   AuthFormDivider,
   AuthFormError,
+  AuthFormField,
+  AuthFormFooter,
+  AuthFormShell,
+  AuthGoogleButton,
 } from "@/components/marketing/auth-form-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,78 +50,73 @@ export function SignUpForm() {
   }
 
   return (
-    <div className="space-y-6">
-      <AuthFormCard>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error ? <AuthFormError message={error} /> : null}
+    <div className="space-y-3 sm:space-y-4">
+      <AuthFormShell>
+        <div className="space-y-3.5 p-4 sm:space-y-4 sm:p-5">
+          <AuthGoogleButton href={googleAuthHref} />
 
-          <div className="space-y-2">
-            <label htmlFor="sign-up-name" className="text-sm font-medium text-foreground">
-              Name
-            </label>
-            <Input
-              id="sign-up-name"
-              type="text"
-              required
-              autoComplete="name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder="Your name"
-              className="h-10"
-            />
-          </div>
+          <AuthFormDivider label="Or sign up with email" />
 
-          <div className="space-y-2">
-            <label htmlFor="sign-up-email" className="text-sm font-medium text-foreground">
-              Email
-            </label>
-            <Input
-              id="sign-up-email"
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
-              className="h-10"
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            {error ? <AuthFormError message={error} /> : null}
 
-          <div className="space-y-2">
-            <label htmlFor="sign-up-password" className="text-sm font-medium text-foreground">
-              Password
-            </label>
-            <Input
-              id="sign-up-password"
-              type="password"
-              required
-              minLength={8}
-              autoComplete="new-password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="At least 8 characters"
-              className="h-10"
-            />
-          </div>
+            <AuthFormField id="sign-up-name" label="Name">
+              <Input
+                id="sign-up-name"
+                type="text"
+                required
+                autoComplete="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder="Your name"
+                className={authInputClassName}
+              />
+            </AuthFormField>
 
-          <Button type="submit" disabled={loading} className="h-10 w-full">
-            {loading ? "Creating account..." : "Create account"}
-          </Button>
-        </form>
-      </AuthFormCard>
+            <AuthFormField id="sign-up-email" label="Email">
+              <Input
+                id="sign-up-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@example.com"
+                className={authInputClassName}
+              />
+            </AuthFormField>
 
-      <AuthFormDivider />
+            <AuthFormField id="sign-up-password" label="Password" hint="Min. 8 characters">
+              <Input
+                id="sign-up-password"
+                type="password"
+                required
+                minLength={8}
+                autoComplete="new-password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Create a password"
+                className={authInputClassName}
+              />
+            </AuthFormField>
 
-      <Button variant="outline" className="h-10 w-full" render={<Link href={googleAuthHref} />}>
-        Continue with Google
-      </Button>
+            <Button
+              type="submit"
+              disabled={loading}
+              className={authPrimaryButtonClassName}
+            >
+              {loading ? "Creating account..." : "Create account"}
+            </Button>
+          </form>
+        </div>
+      </AuthFormShell>
 
-      <p className="text-center text-sm text-muted-foreground">
+      <AuthFormFooter>
         Already have an account?{" "}
-        <Link href="/sign-in" className="text-primary hover:underline">
+        <Link href="/sign-in" className="font-medium text-primary hover:underline">
           Sign in
         </Link>
-      </p>
+      </AuthFormFooter>
     </div>
   );
 }
