@@ -16,7 +16,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { googleAuthHref } from "@/lib/marketing/content";
 
 export function SignInForm() {
   const router = useRouter();
@@ -24,6 +23,22 @@ export function SignInForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  async function handleGoogleSignIn() {
+    setError(null);
+    setGoogleLoading(true);
+
+    const { error: signInError } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
+
+    if (signInError) {
+      setGoogleLoading(false);
+      setError(signInError.message ?? "Google sign in failed. Try again.");
+    }
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -51,7 +66,7 @@ export function SignInForm() {
     <div className="space-y-3 sm:space-y-4">
       <AuthFormShell>
         <div className="space-y-3.5 p-4 sm:space-y-4 sm:p-5">
-          <AuthGoogleButton href={googleAuthHref} />
+          <AuthGoogleButton onClick={handleGoogleSignIn} loading={googleLoading} />
 
           <AuthFormDivider />
 

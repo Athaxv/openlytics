@@ -74,21 +74,25 @@ export function GoogleIcon({ className }: { className?: string }) {
 }
 
 type AuthGoogleButtonProps = {
-  href: string;
+  onClick: () => void;
+  disabled?: boolean;
+  loading?: boolean;
 };
 
-export function AuthGoogleButton({ href }: AuthGoogleButtonProps) {
+export function AuthGoogleButton({ onClick, disabled, loading }: AuthGoogleButtonProps) {
   return (
-    <Link
-      href={href}
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled || loading}
       className={cn(
         authOutlineButtonClassName,
         "inline-flex items-center justify-center gap-2.5 text-sm font-medium text-foreground",
       )}
     >
       <GoogleIcon />
-      Continue with Google
-    </Link>
+      {loading ? "Redirecting to Google..." : "Continue with Google"}
+    </button>
   );
 }
 

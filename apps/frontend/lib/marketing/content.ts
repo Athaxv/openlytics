@@ -143,6 +143,3 @@ export const authBrandQuote = {
   name: "Alex R.",
   role: "ICPC candidate",
 };
-
-export const googleAuthHref =
-  "/api/auth/sign-in/social?provider=google&callbackURL=/dashboard";
